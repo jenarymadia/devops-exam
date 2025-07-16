@@ -1,0 +1,4 @@
+apiVersion: v2
+name: hextris
+description: A Helm chart for deploying Hextris game
+version: 0.1.0
