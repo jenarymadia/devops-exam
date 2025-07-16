@@ -1,19 +1,5 @@
 # 🎮 Hextris Deployment on Kubernetes with Kind, Docker, and Helm
 
-## Overview
-
-hextris-deployment/
-├── Dockerfile
-├── terraform/
-│   └── main.tf
-├── helm/
-│   ├── Chart.yaml
-│   ├── values.yaml
-│   └── templates/
-│       ├── deployment.yaml
-│       └── service.yaml
-└── README.md
-
 ## Prerequisites
 
 Install the following tools:
@@ -25,12 +11,37 @@ Install the following tools:
 
 ---
 
-1. cd terraform
-2. terraform init
-3. terraform apply -auto-approve
-4. cd ..
-5. git clone https://github.com/Hextris/hextris.git
-5. docker build -t hextris .
-6. kind load docker-image hextris --name hextris-cluster
-7. helm install hextris ./helm
-8. kubectl port-forward svc/hextris 8080:80
+## Deployment Steps
+
+1. Clone this repository  
+
+   `git clone https://github.com/YOUR_USERNAME/hextris-deployment.git && cd hextris-deployment`
+
+2. Clone the Hextris source code  
+
+   `git clone https://github.com/Hextris/hextris.git`
+
+3. Create a Kind Kubernetes cluster using Terraform  
+   ```bash
+   cd terraform  
+   terraform init  
+   terraform apply -auto-approve  
+   cd ..
+
+4. Build the Docker image
+
+   `docker build -t hextris .`
+
+5. Load the image into the Kind cluster
+
+    `kind load docker-image hextris --name hextris-cluster`
+
+6. Deploy Hextris using Helm
+
+    `helm install hextris ./helm`
+
+7. Access the game locally
+
+    `kubectl port-forward svc/hextris 8080:80`
+
+8. Open in browser: http://localhost:8080
